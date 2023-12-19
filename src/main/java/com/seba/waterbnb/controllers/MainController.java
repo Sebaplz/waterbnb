@@ -65,6 +65,7 @@ public class MainController {
         } else {
             model.addAttribute("error", "Credenciales Invalidas!");
             model.addAttribute("register", new User());
+            model.addAttribute("roles", Rol.roles);
             return "login.jsp";
         }
     }

@@ -72,7 +72,7 @@ public class GuestController {
         User user = userService.findUserById((Long) session.getAttribute("userId"));
         model.addAttribute("user", user);
         reviewService.review(review.getComment(),user,place, review.getRating());
-        place.setRating(reviewService.obtenerPromedio(id));
+        place.setRating(reviewService.obtenerPromedio(id, 2));
         placeService.createPlace(place);
         return "redirect:/pools/" + id;
     }

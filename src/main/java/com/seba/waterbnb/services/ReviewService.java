@@ -19,9 +19,12 @@ public class ReviewService {
         reviewRepository.save(review1);
     }
 
-    public Double obtenerPromedio(Long id) {
+    public Double obtenerPromedio(Long id, int numberOfDecimals) {
         Optional<Double> promedio = reviewRepository.obtenerPromedioRatings(id);
-        return promedio.orElse(0.0);
+        return promedio.map(value -> {
+            double scale = Math.pow(10, numberOfDecimals);
+            return Math.round(value * scale) / scale;
+        }).orElse(0.0);
     }
 
     public void eliminarReview(Long reviewId) {

@@ -88,7 +88,7 @@ public class HostController {
             }
             User user = userService.findUserById((Long) session.getAttribute("userId"));
             model.addAttribute("allPlaces", placeService.allPlacesById(user.getId()));
-            place.setRating(reviewService.obtenerPromedio(id));
+            place.setRating(reviewService.obtenerPromedio(id, 2));
             placeService.createPlace(place);
             return "/host/dashboard.jsp";
         }
