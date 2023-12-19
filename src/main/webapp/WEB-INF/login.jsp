@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- c:out ; c:forEach etc. -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Formatting (dates) -->
@@ -77,14 +76,15 @@ pageEncoding="ISO-8859-1"%>
                 />
               </div>
               <form:errors path="passwordConfirmation" class="text-danger" />
-              <div class="d-flex justify-content-end mt-3">
+              <div class="d-flex justify-content-between mt-3">
+                <label class="fs-5 col-4">Type of Account:</label>
                 <form:select
-                  class="form-select w-50"
+                  class="form-select w-50 text-uppercase"
                   type="text"
                   path="rol"
                 >
                   <c:forEach items="${roles}" var="rol">
-                      <form:option value="${rol}"></form:option>
+                      <form:option class="text-uppercase" value="${rol}"></form:option>
                   </c:forEach>
                 </form:select>
               </div>

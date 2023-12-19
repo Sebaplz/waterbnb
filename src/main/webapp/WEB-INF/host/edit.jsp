@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- c:out ; c:forEach etc. -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Formatting (dates) -->
@@ -42,6 +41,7 @@ pageEncoding="ISO-8859-1"%>
               <input type="hidden" name="_method" value="put">
               <form:hidden value="${user.id}" path="userPlace" />
               <form:hidden value="${places.address}" path="address" />
+              <form:hidden value="${places.poolSize}" path="poolSize" />
               <div class="d-flex justify-content-between mt-3">
                 <textarea
                     name="description"
@@ -66,15 +66,8 @@ pageEncoding="ISO-8859-1"%>
                 <p class="fs-5">Name: ${user.firstName} ${user.lastName}</p>
               </div>
               <div class="d-flex justify-content-between">
-                <form:label path="poolSize" class="fs-5 col-4"
-                  >Pool Size</form:label
-                >
-                <form:select class="form-select w-50" path="poolSize">
-                  <option value="Small">Small</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Large">Large</option>
-                </form:select>
-              </div>
+                  <p class="fs-5">Pool Size: ${places.poolSize}</p>
+                </div>
               <div
                 class="d-flex justify-content-between mt-2 align-items-center"
               >

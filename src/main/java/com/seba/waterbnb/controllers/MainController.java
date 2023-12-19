@@ -29,6 +29,7 @@ public class MainController {
     public String index(Model model, HttpSession session){
         model.addAttribute("userLogeado", session.getAttribute("userId"));
         model.addAttribute("userHost", session.getAttribute("userRol"));
+        model.addAttribute("placeList", placeService.findAll());
         return "index.jsp";
     }
 
@@ -66,6 +67,7 @@ public class MainController {
         userValidator.validate(user, result);
         if (result.hasErrors()) {
             model.addAttribute("login", new User());
+            model.addAttribute("roles", Rol.roles);
             return "login.jsp";
         }
 
@@ -82,6 +84,7 @@ public class MainController {
         } catch (DataIntegrityViolationException e) {
             result.rejectValue("email", "error.email", "El email ingresado ya está en uso. Por favor, ingrese otro email.");
             model.addAttribute("login", new User());
+            model.addAttribute("roles", Rol.roles);
             return "login.jsp";
         }
 

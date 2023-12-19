@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- c:out ; c:forEach etc. -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Formatting (dates) -->
@@ -39,6 +38,7 @@ pageEncoding="ISO-8859-1"%>
                 <th scope="col">Pool Size</th>
                 <th scope="col">Cost per night</th>
                 <th scope="col">Details</th>
+                <th scope="col">Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -48,6 +48,11 @@ pageEncoding="ISO-8859-1"%>
                   <td>${a.poolSize}</td>
                   <td>${a.cost}</td>
                   <td><a href="/host/pools/${a.id}">${a.rating} - edit</a></td>
+                  <td>
+                    <form action="/host/pools/${a.id}/delete" method="post">
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                  </td>
                 </tr>
               </c:forEach>
             </tbody>

@@ -14,14 +14,18 @@ public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    public void review(String review, User author, Place place, double rating){
+    public void review(String review, User author, Place place, double rating) {
         Review review1 = new Review(review, author, place, rating);
         reviewRepository.save(review1);
     }
 
-    public Double obtenerPromedio(Long id){
-         Optional<Double> promedio = reviewRepository.obtenerPromedioRatings(id);
+    public Double obtenerPromedio(Long id) {
+        Optional<Double> promedio = reviewRepository.obtenerPromedioRatings(id);
         return promedio.orElse(0.0);
+    }
+
+    public void eliminarReview(Long reviewId) {
+        reviewRepository.deleteById(reviewId);
     }
 
 }

@@ -94,4 +94,10 @@ public class HostController {
         }
         return "redirect:/";
     }
+
+    @PostMapping("/host/pools/{id}/delete")
+    public String deletePlace(@PathVariable("id") Long id) {
+        placeService.deletePlace(id);
+        return "redirect:/host/dashboard";
+    }
 }

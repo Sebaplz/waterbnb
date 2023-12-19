@@ -76,4 +76,10 @@ public class GuestController {
         placeService.createPlace(place);
         return "redirect:/pools/" + id;
     }
+
+    @PostMapping("/pools/{id}/review/{reviewId}/delete")
+    public String deleteReview(@PathVariable("id") Long placeId, @PathVariable("reviewId") Long reviewId) {
+        reviewService.eliminarReview(reviewId);
+        return "redirect:/pools/" + placeId;
+    }
 }

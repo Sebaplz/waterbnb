@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- c:out ; c:forEach etc. -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Formatting (dates) -->
@@ -57,6 +56,30 @@ pageEncoding="ISO-8859-1"%>
           </button>
         </div>
       </form>
+      <div class="row mt-5">
+          <div class="col-12">
+            <table class="table table-striped border border-1">
+              <thead>
+                <tr class="table-secondary">
+                  <th scope="col">Address</th>
+                  <th scope="col">Pool Size</th>
+                  <th scope="col">Cost per night</th>
+                  <th scope="col">Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <c:forEach items="${placeList}" var="p">
+                  <tr>
+                    <td>${p.address}</td>
+                    <td>${p.poolSize}</td>
+                    <td>${p.cost}</td>
+                    <td><a href="/pools/${p.id}">${p.rating}/5 - See more</a></td>
+                  </tr>
+                </c:forEach>
+              </tbody>
+            </table>
+          </div>
+        </div>
     </div>
   </body>
 </html>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- c:out ; c:forEach etc. -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Formatting (dates) -->
@@ -61,7 +60,7 @@ pageEncoding="ISO-8859-1"%>
                     >
                   </c:when>
                   <c:otherwise>
-                    <a href="/" class="fs-3">Leave a review</a>
+                    <p class="fs-2">Must be a guest to leave a review</p>
                   </c:otherwise>
                 </c:choose>
               </c:when>
@@ -74,9 +73,22 @@ pageEncoding="ISO-8859-1"%>
         <div class="col-12">
           <div class="border border-2 p-2" style="height: 480px; overflow-y: scroll;">
             <c:forEach items="${place.reviews}" var="review">
-              <h4>${review.author.firstName}:</h4>
-              <h4>Rating: ${review.rating}/5</h4>
-              <p class="px-2">${review.comment}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex flex-column">
+                    <h4>${review.author.firstName}:</h4>
+                    <h4>Rating: ${review.rating}/5</h4>
+                    <p class="px-2">${review.comment}</p>
+                </div>
+                <c:choose>
+                  <c:when test="${userLogeado == review.author.id}">
+                  <form action="/pools/${place.id}/review/${review.id}/delete" method="post">
+                      <input class="btn btn-danger" type="submit" value="Delete Review">
+                  </form>
+                  </c:when>
+                  <c:otherwise>
+                  </c:otherwise>
+                </c:choose>
+              </div>
               <hr>
             </c:forEach>
           </div>

@@ -33,13 +33,10 @@ public class UserService {
 
     // autenticar usuario
     public boolean authenticateUser(String email, String password) {
-        // primero encontrar el usuario por su email
         User user = userRepository.findByEmail(email);
-        // si no lo podemos encontrar por su email, retornamos false
         if (user == null) {
             return false;
         } else {
-            // si el password coincide devolvemos true, sino, devolvemos false
             return BCrypt.checkpw(password, user.getPassword());
         }
     }
