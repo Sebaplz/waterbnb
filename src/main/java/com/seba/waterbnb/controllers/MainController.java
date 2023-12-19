@@ -1,5 +1,6 @@
 package com.seba.waterbnb.controllers;
 
+import com.seba.waterbnb.models.Place;
 import com.seba.waterbnb.models.Rol;
 import com.seba.waterbnb.models.User;
 import com.seba.waterbnb.services.PlaceService;
@@ -9,12 +10,15 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
@@ -26,10 +30,13 @@ public class MainController {
     private PlaceService placeService;
 
     @GetMapping("/")
-    public String index(Model model, HttpSession session){
+    public String index(@RequestParam(defaultValue = "0") int page,
+                        @RequestParam(defaultValue = "4") int size,
+                        Model model, HttpSession session) {
+        Page<Place> placePage = placeService.findAllPaginated(PageRequest.of(page, size));
         model.addAttribute("userLogeado", session.getAttribute("userId"));
         model.addAttribute("userHost", session.getAttribute("userRol"));
-        model.addAttribute("placeList", placeService.findAll());
+        model.addAttribute("placePage", placePage);
         return "index.jsp";
     }
 

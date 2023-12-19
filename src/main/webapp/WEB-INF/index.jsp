@@ -45,40 +45,45 @@
       </h2>
       <form action="/search" method="get">
         <div class="d-flex justify-content-center mt-5">
-          <input
-            type="text"
-            class="form-control w-25 me-2"
-            placeholder="location"
-            name="q"
-          />
+          <input type="text" class="form-control w-25 me-2" placeholder="location" name="q" />
           <button type="submit" class="btn btn-success" type="button">
             Search
           </button>
         </div>
       </form>
       <div class="row mt-5">
-          <div class="col-12">
-            <table class="table table-striped border border-1">
-              <thead>
-                <tr class="table-secondary">
-                  <th scope="col">Address</th>
-                  <th scope="col">Pool Size</th>
-                  <th scope="col">Cost per night</th>
-                  <th scope="col">Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                <c:forEach items="${placeList}" var="p">
-                  <tr>
-                    <td>${p.address}</td>
-                    <td>${p.poolSize}</td>
-                    <td>${p.cost}</td>
-                    <td><a href="/pools/${p.id}">${p.rating}/5 - See more</a></td>
-                  </tr>
+        <div class="col-12">
+          <table class="table table-striped border border-1">
+            <thead>
+              <tr class="table-secondary">
+                <th scope="col">Address</th>
+                <th scope="col">Pool Size</th>
+                <th scope="col">Cost per night</th>
+                <th scope="col">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${placePage.content}" var="p">
+                    <tr>
+                        <td>${p.address}</td>
+                        <td>${p.poolSize}</td>
+                        <td>${p.cost}</td>
+                        <td><a href="/pools/${p.id}">${p.rating}/5 - See more</a></td>
+                    </tr>
                 </c:forEach>
-              </tbody>
-            </table>
-          </div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+        <!-- Paginación -->
+        <div class="d-flex justify-content-center mt-5">
+            <ul class="pagination">
+                <c:forEach begin="0" end="${placePage.totalPages - 1}" var="i">
+                    <li class="page-item <c:if test="${placePage.number eq i}">active</c:if>">
+                        <a class="page-link" href="/?page=${i}&size=${placePage.size}">${i + 1}</a>
+                    </li>
+                </c:forEach>
+            </ul>
         </div>
     </div>
   </body>
